@@ -6,7 +6,7 @@ Agent-owned. Replace this outline with a report scaled to the objective. Merge o
 
 ## Question and answer
 
-State the research question, relevant scope, concise answer, and confidence with an evidential justification. An unresolved or negative result is acceptable. Distinguish sourced findings, reproduced results, inferences, and assumptions.
+State the research question, relevant scope, concise answer, and confidence with an evidential justification. An unresolved or negative result is acceptable. Distinguish sourced findings, reproduced results, inferences, and assumptions. For mathematical claims, give the precise statement and assumptions, identify conjectures or remaining proof obligations, and state the [mathematical support obtained](../AGENTS.md#mathematical-support).
 
 ## Key evidence and quantitative results
 
@@ -14,7 +14,7 @@ Explain the evidence that determines the answer. Link important claims to eviden
 
 ## Alternatives and strongest counterevidence
 
-Describe consequential competing explanations, why any were rejected, what remains viable, and the strongest evidence against the leading interpretation. Preserve disagreement between sources and explain its relevance.
+Describe consequential competing explanations, why any were rejected, what remains viable, and the strongest evidence against the leading interpretation. Preserve disagreement between sources and explain its relevance. For conjectures, summarize counterexample-search coverage and limits, linking records rather than repeating search logs.
 
 ## Uncertainty and limitations
 

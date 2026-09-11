@@ -15,11 +15,13 @@ Not investigated. No confidence assessment yet.
 
 - **Established facts / important observations:** none assessed
 - **Live hypotheses; support and counterevidence:** none assessed
-- **Important prior decisions:** none; link decisive rejections and interpretation changes
+- **Important prior decisions:** none; link decisive rejections and H/D records explaining changes in scope, assumptions, or direction
 - **Assumptions:** none adopted
 - **Contradictions / important uncertainty:** not assessed
 
-Use evidence links and distinguish sourced results, observations, and agent interpretations. Keep rejected hypotheses and major changes in decision records rather than expanding this snapshot into a history.
+Use evidence links and distinguish sourced results, observations, and agent interpretations. For mathematical claims, identify the [support obtained](AGENTS.md#mathematical-support) and remaining proof obligations. Keep rejected hypotheses and major changes in decision records rather than expanding this snapshot into a history.
+
+If a [knowledge map](KNOWLEDGE_MAP.md) is warranted, link its relevant view and consequential validation gaps here; keep relationship detail in the map.
 
 ## Direction and handoff
 

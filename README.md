@@ -42,15 +42,19 @@ Add folders only when useful:
 
 After setup, the agent normally edits state, evidence, analysis, and outputs. It preserves the human brief and supplied originals; inferred success criteria, assumptions, and proposed scope changes belong in state. Large investigations may split evidence into linked topic files; they retain the same entry point and stable record links. No database, package installation, or fixed research pipeline is required for the core template.
 
+## Mathematical and computational work
+
+[AGENTS.md](AGENTS.md#mathematical-and-computational-research) guides capability selection, falsification, and the distinctions between numerical evidence, exact results, and proofs. Tools, including formal verification, remain project-driven. State any required level of assurance or tool/resource restrictions in `PROJECT.md` or the discussion; otherwise the agent infers an appropriate answer criterion.
+
 ## Human steering without conversation logs
 
-You can steer the investigation in conversation or by editing `PROJECT.md`. During setup and research, the agent preserves consequential input in the existing [evidence/RECORDS.md](evidence/RECORDS.md) with stable `H001`, `H002`, etc. IDs: objective or scope changes, constraints, priorities, important clarifications, supplied hypotheses or observations, authorization for experiments or external actions, and stopping decisions.
+Steer the investigation in conversation or by editing `PROJECT.md`. The agent saves consequential input in [H records](evidence/RECORDS.md#human-input-record-format) and links applicable steering from `STATE.md`. A later instruction can apply without rewriting the brief. Objective, scope, assumption, or direction changes retain the triggering excerpt, stated reason, and before/after effect. Linked corrections and revocations preserve history and make current instructions clear; authorization retains its limits.
 
-Each compact record keeps a timestamp with timezone (or a labeled capture time if the input time is unknown), type, relevant human wording or labeled paraphrase, the agent's separate interpretation, and the effect on research state. Related points can share a record. Applicable steering and authorization are summarized and linked from `STATE.md` before dependent action or handoff. Later changes or revocations get a new linked record, preserving history while making current instructions clear. The brief remains human-owned; a later explicit instruction can apply without requiring you to rewrite it.
+Human input (`H`), evidence and analysis (`E`), and consequential agent decisions (`D`) stay distinct: a supplied observation or preference is not a verified finding. Simple steering needs only H, not a record of every kind. The record formats preserve timestamps, origin, interpretation, and consequences without logging routine conversation, full transcripts, or private reasoning.
 
-The distinction is **human-provided information (`H`) → agent interpretation → evidence (`E`) → research conclusion**. For example, “I observed drift above 40 °C” is a human-reported observation in `H`; analysis of supplied measurements belongs in a linked `E` record stating what was checked. A consequential agent decision belongs in `D`, linked to its human and evidential basis as applicable. Simple steering needs only `H`; there is no requirement to create all three record types for every input. Authorization preserves its stated limits and is not evidence for a scientific claim.
+## Relationships in large investigations
 
-Routine conversation, exhaustive transcripts, private reasoning, and unrelated personal detail are not stored. The records preserve what changes the investigation, not a message-by-message history.
+Small investigations need no graph. When relationships become difficult to follow, the [knowledge-map guide](KNOWLEDGE_MAP.md) provides an optional claim-centered format, six human views, and lightweight validation. The map references canonical E/D/H records and keeps relationship detail out of `STATE.md`.
 
 ## Progress, interruption, and completion
 
