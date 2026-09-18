@@ -11,7 +11,7 @@ A small, tool-agnostic workspace for investigating a question, testing explanati
 3. Send the setup prompt below. The agent writes [PROJECT.md](PROJECT.md) and initializes [STATE.md](STATE.md), leaving the project ready to run.
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px', 'lineColor': '#768390'}}}%%
 flowchart TD
     D[Discuss the research idea] --> S[Setup prompt:<br/>write the brief]
     S --> L[Loop prompt:<br/>autonomous research]
@@ -26,13 +26,46 @@ Setup runs once per project. The loop prompt is reusable: every later run, inclu
 
 ### Set up from the discussion
 
-> Read AGENTS.md and set up this new research project from our preceding discussion. Write PROJECT.md with the objective, relevant context, constraints, supplied resources, desired outputs, stopping conditions, and important unknowns. Initialize STATE.md with inferred practical success criteria, labeled assumptions, the key uncertainty, and a concrete next action. Preserve supplied originals and distinguish human-provided information from agent inference. Ask only for essential inaccessible information or consequential choices that depend on my priorities; do not ask me for discoverable background or a research plan. Keep setup compact and stop with the workspace ready for the research loop.
+```text
+Read AGENTS.md and set up this new research project from our preceding
+discussion. Write PROJECT.md with the objective, relevant context, constraints,
+supplied resources, desired outputs, stopping conditions, and important
+unknowns. Initialize STATE.md with inferred practical success criteria, labeled
+assumptions, the key uncertainty, and a concrete next action. Preserve supplied
+originals and distinguish human-provided information from agent inference. Ask
+only for essential inaccessible information or consequential choices that depend
+on my priorities; do not ask me for discoverable background or a research plan.
+Keep setup compact and stop with the workspace ready for the research loop.
+```
 
 Only a research question is required; the agent can help phrase it from the discussion. For example: “I want to understand why these sensor measurements drift and whether either of our two calibration methods explains it.” A little context about the apparatus and links to the measurements are enough to set up that investigation. The agent infers what a useful answer would establish and discovers public background during research. You can also edit `PROJECT.md` directly and proceed to the loop prompt.
 
 ### Start or resume the research loop
 
-> Read AGENTS.md and start or resume the research defined in PROJECT.md.
+```text
+Take ownership of the research question in this repository and drive it to an
+evidence-backed answer.
+
+Read AGENTS.md first and follow it. It defines the workflow, the evidence and
+provenance conventions, your authority limits, and the stopping rules. Let it
+route your other reading; PROJECT.md holds the brief and STATE.md the current
+checkpoint. Reconcile that checkpoint against the saved records and artifacts
+before you act on it.
+
+Work in many actions, not one: pick the uncertainty that most affects the answer,
+reduce it, record the evidence, then pick the next. Decide routine reversible
+things yourself instead of asking permission for work you are already authorized
+to do. Seek the strongest counterevidence before accepting an important
+conclusion.
+
+Stop only when the question has a defensible answer, further accessible work
+would not materially change it, or progress depends on a human decision or an
+external dependency. Checkpoint STATE.md before stopping, write the synthesis
+where AGENTS.md directs, and record exactly what you need and what happens next.
+
+The repository is the source of truth, not this conversation. Leave nothing a
+successor would need only in chat.
+```
 
 Use this same prompt for the first research run and after interruptions. Setup is needed only for a new project; the saved files carry the discussion's essential context into later runs.
 
@@ -77,7 +110,7 @@ To resume, use the [research loop prompt](#start-or-resume-the-research-loop). A
 `STATE.md`'s Loop continuity section is what makes a long investigation safe to interrupt: it names the current checkpoint owner, any in-flight action whose outcome is unknown, how many attempts the current question has taken, and the avenues already ruled out. A successor resolves that section before dependent work, so an interrupted operation is checked rather than assumed and a known dead end is not repeated. See the [persistent loop robustness rules](AGENTS.md#persistent-loop-robustness).
 
 ```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px', 'lineColor': '#768390'}}}%%
 flowchart TD
     R[Run starts or resumes] --> RC[Reconcile Loop continuity]
     RC --> IF{In-flight action?}
