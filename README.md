@@ -10,6 +10,20 @@ A small, tool-agnostic workspace for investigating a question, testing explanati
 2. Copy this template into a new project directory, or create a repository from it, using the blank template files. Open that directory in the agent with the discussion available; if switching conversations, bring a summary and links to supplied materials. The template's design-prompt history is not needed in new projects.
 3. Send the setup prompt below. The agent writes [PROJECT.md](PROJECT.md) and initializes [STATE.md](STATE.md), leaving the project ready to run.
 
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
+flowchart TD
+    D[Discuss the research idea] --> S[Setup prompt:<br/>write the brief]
+    S --> L[Loop prompt:<br/>autonomous research]
+    RS[Interrupted, or a new agent] --> L
+    L --> RES{Objective resolved?}
+    RES -->|Yes| F[finished:<br/>synthesis in the report]
+    RES -->|Needs input| B[blocked:<br/>exact input to resume]
+    B -->|Input supplied| L
+```
+
+Setup runs once per project. The loop prompt is reusable: every later run, including a fresh agent, re-enters at the same point using the saved files. A finished project may be an answer, a qualified answer, surviving alternatives, a negative result, or a currently unresolvable question.
+
 ### Set up from the discussion
 
 > Read AGENTS.md and set up this new research project from our preceding discussion. Write PROJECT.md with the objective, relevant context, constraints, supplied resources, desired outputs, stopping conditions, and important unknowns. Initialize STATE.md with inferred practical success criteria, labeled assumptions, the key uncertainty, and a concrete next action. Preserve supplied originals and distinguish human-provided information from agent inference. Ask only for essential inaccessible information or consequential choices that depend on my priorities; do not ask me for discoverable background or a research plan. Keep setup compact and stop with the workspace ready for the research loop.
@@ -42,6 +56,8 @@ Add folders only when useful:
 
 After setup, the agent normally edits state, evidence, analysis, and outputs. It preserves the human brief and supplied originals; inferred success criteria, assumptions, and proposed scope changes belong in state. Large investigations may split evidence into linked topic files; they retain the same entry point and stable record links. No database, package installation, or fixed research pipeline is required for the core template.
 
+For Claude Code users, `CLAUDE.md` points at these same files and `.claude/commands/setup.md` and `.claude/commands/loop.md` expose the two prompts above as `/setup` and `/loop`. Maintainers can run `python3 tools/validate_template.py .` to check the template's structure and that `STATE.md` / `outputs/REPORT.md` remain uninitialized; the same check runs in CI (`.github/workflows/validate.yml`). A `.gitignore` keeps local credentials and private working data out of version control. See `CHANGELOG.md` for template history and `LICENSE` (MIT) for reuse terms.
+
 ## Human steering without conversation logs
 
 You can steer the investigation in conversation or by editing `PROJECT.md`. During setup and research, the agent preserves consequential input in the existing [evidence/RECORDS.md](evidence/RECORDS.md) with stable `H001`, `H002`, etc. IDs: objective or scope changes, constraints, priorities, important clarifications, supplied hypotheses or observations, authorization for experiments or external actions, and stopping decisions.
@@ -56,7 +72,29 @@ Routine conversation, exhaustive transcripts, private reasoning, and unrelated p
 
 Read [STATE.md](STATE.md) for the current interpretation and highest-value next action. Follow its evidence links to audit important claims. Its status describes the last saved checkpoint, not whether an agent process is currently running. Evidence records distinguish observations, source results, calculations, and interpretations; decision records explain major changes without recording private reasoning traces.
 
-To resume, use the [research loop prompt](#start-or-resume-the-research-loop). A fresh agent reads `AGENTS.md`, `PROJECT.md`, and `STATE.md`, reconciles the brief with applicable human-input records, then reads the other records and artifacts needed for the next action. It verifies unfinished work before repeating it. If the host ends a run or loses context, restart with that prompt; the files provide continuity within the host's execution limits.
+To resume, use the [research loop prompt](#start-or-resume-the-research-loop). A fresh agent reads `AGENTS.md`, `PROJECT.md`, and `STATE.md`, reconciles the brief with applicable human-input records, then reads the other records and artifacts needed for the next action. It verifies unfinished work before repeating it.
+
+`STATE.md`'s Loop continuity section is what makes a long investigation safe to interrupt: it names the current checkpoint owner, any in-flight action whose outcome is unknown, how many attempts the current question has taken, and the avenues already ruled out. A successor resolves that section before dependent work, so an interrupted operation is checked rather than assumed and a known dead end is not repeated. See the [persistent loop robustness rules](AGENTS.md#persistent-loop-robustness).
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'fontSize': '18px'}}}%%
+flowchart TD
+    R[Run starts or resumes] --> RC[Reconcile Loop continuity]
+    RC --> IF{In-flight action?}
+    IF -->|Yes| VF[Outcome UNKNOWN:<br/>check actual state]
+    IF -->|No| CH[Choose next action:<br/>skip what is ruled out]
+    VF --> CH
+    CH --> WA[Record intent, then act]
+    WA --> WR[1. Save records and artifacts]
+    WR --> US[2. Update STATE.md]
+    US --> CL[3. Clear in-flight entry]
+    CL --> PG{New evidence?}
+    PG -->|Yes| CH
+    PG -->|No| ES[Change method,<br/>rule out, or ask]
+    ES --> CH
+```
+
+The numbered write order is what makes an interruption detectable: it leaves unreferenced evidence that reconciliation finds, rather than a checkpoint citing evidence that was never written. Routine reversible reading and local analysis need no in-flight entry. If the host ends a run or loses context, restart with that prompt; the files provide continuity within the host's execution limits.
 
 The agent handles routine reversible decisions. It asks for human input when essential inaccessible information, a consequential preference, changed scope, or an action requiring authorization prevents progress. Existing authorization continues to apply, and independent useful work can continue while an answer is pending.
 
