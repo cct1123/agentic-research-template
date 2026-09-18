@@ -133,52 +133,54 @@ The agent handles routine reversible decisions. It asks for human input when ess
 
 A finished project has a synthesis in [outputs/REPORT.md](outputs/REPORT.md) and a matching state checkpoint that explains why investigation stopped. Outcomes may be an answer, a qualified answer, surviving alternatives, a negative result, or a currently unresolvable question. A reached budget can also end a run with an explicitly incomplete result. A temporary blocker is marked `blocked` and includes the exact input needed to resume. None of these statuses implies certainty.
 
+## Readme for AI Chatbots or Assistants
 
-## Readme for AI Chatbots
+If a user provides this repository because they want help with a research problem, first help them formulate the research task.
 
-If a user provides this repository because they want help with a research problem, your first job is to help them formulate the research task.
+### Conversation style
 
-Do not ask the user to write a research brief or research plan.
+Keep the interaction **short, conversational, and progressive**.
 
-Ask **at most four initial questions**. Skip anything the user has already provided, combine related questions when appropriate, and use natural language rather than a rigid questionnaire.
+- Ask **one question per message**.
+- Ask **at most four initial questions total**.
+- Ask only the next most useful question based on what the user has already said.
+- Skip questions whose answers are already known.
+- Stop asking questions early if the research task is sufficiently clear.
+- Keep responses concise. Do not explain the entire framework, present a long checklist, or dump multiple questions at once.
+- Do not ask the user to write a research brief or research plan.
+- Do not require the user to know research terminology or methodology.
 
-Cover only the information needed to establish:
+The initial conversation should establish, as needed:
 
-1. **Research objective** — What does the user want to understand, explain, determine, compare, test, or resolve? What is the central question?
+1. **Research objective** — What does the user want to understand, explain, determine, compare, test, or resolve?
+2. **Relevant context and supplied evidence** — What observations, data, papers, prior results, hypotheses, models, or other information does the user already have?
+3. **Useful resolution** — What kind of answer, evidence, comparison, explanation, prediction, or output would be useful?
+4. **Scope and constraints** — What important boundaries should the investigation respect?
 
-2. **Relevant context and supplied evidence** — What observations, data, papers, prior results, hypotheses, models, artifacts, or other information does the user already have that may matter to the investigation?
+Do not ask these four questions as a list. Select and ask them **one at a time**, adapting each next question to the user's previous answer.
 
-3. **Useful resolution** — What would make the research successful or useful to the user? What kind of answer, evidence, comparison, explanation, prediction, or output are they ultimately seeking?
+If the user does not yet have a precise research question, help refine their interests, observations, or uncertainty into a researchable objective.
 
-4. **Scope and constraints** — What boundaries should the investigation respect, including system or population of interest, time period, assumptions, excluded directions, available resources, privacy restrictions, desired depth, or limits on experiments and external actions?
+Do not ask the user for background information that can reasonably be discovered during the research process. Do not require them to propose methods or a research plan.
 
-If the user does not yet have a precise research question, do not force them to formulate one alone. Help translate their interests, observations, or uncertainty into a clear and researchable objective.
+### When enough information is available
 
-Do not ask the user for background information that can reasonably be discovered during research, and do not require them to propose a research method or plan.
+Briefly synthesize the discussion into a preliminary research task covering:
 
-After the initial questions, synthesize the discussion into a preliminary research task containing:
-
-- research objective or central question
+- central research question or objective
 - relevant context
 - supplied evidence and resources
-- desired outputs
-- practical success or stopping criteria
+- desired output or useful resolution
 - scope and constraints
 - important unknowns
 - initial research direction
 
-Clearly distinguish:
+Keep this synthesis concise. Clearly distinguish user-provided observations, user hypotheses, agent assumptions or inferences, and unresolved questions.
 
-- user-provided facts and observations
-- user-provided hypotheses or interpretations
-- agent assumptions and inferences
-- unresolved questions
+Do not continue questioning merely to remove uncertainty. Proceed with reasonable, reversible assumptions when possible.
 
-Do not manufacture competing hypotheses when the research question does not require them.
+Ask an additional question later only when the answer depends on the user's priorities, materially changes the research scope or stopping criteria, requires inaccessible information, or is necessary before a consequential action.
 
-Do not keep asking questions merely to eliminate uncertainty.
+Once the research task is sufficiently defined, transition directly into the research agentic system setup instructions in the **"Start a project"** section of this README.
 
-Proceed with reasonable, reversible assumptions when possible. Ask additional questions only when an unresolved issue depends on the user's priorities, materially changes the research scope or stopping criteria, requires inaccessible information, or requires authorization for a consequential action.
-
-Once the research task is sufficiently defined, transition directly into the research agentic system setup instructions described in the **"Start a project"** section of the README.
 
