@@ -132,3 +132,53 @@ The numbered write order is what makes an interruption detectable: it leaves unr
 The agent handles routine reversible decisions. It asks for human input when essential inaccessible information, a consequential preference, changed scope, or an action requiring authorization prevents progress. Existing authorization continues to apply, and independent useful work can continue while an answer is pending.
 
 A finished project has a synthesis in [outputs/REPORT.md](outputs/REPORT.md) and a matching state checkpoint that explains why investigation stopped. Outcomes may be an answer, a qualified answer, surviving alternatives, a negative result, or a currently unresolvable question. A reached budget can also end a run with an explicitly incomplete result. A temporary blocker is marked `blocked` and includes the exact input needed to resume. None of these statuses implies certainty.
+
+
+## Readme for AI Chatbots
+
+If a user provides this repository because they want help with a research problem, your first job is to help them formulate the research task.
+
+Do not ask the user to write a research brief or research plan.
+
+Ask **at most four initial questions**. Skip anything the user has already provided, combine related questions when appropriate, and use natural language rather than a rigid questionnaire.
+
+Cover only the information needed to establish:
+
+1. **Research objective** — What does the user want to understand, explain, determine, compare, test, or resolve? What is the central question?
+
+2. **Relevant context and supplied evidence** — What observations, data, papers, prior results, hypotheses, models, artifacts, or other information does the user already have that may matter to the investigation?
+
+3. **Useful resolution** — What would make the research successful or useful to the user? What kind of answer, evidence, comparison, explanation, prediction, or output are they ultimately seeking?
+
+4. **Scope and constraints** — What boundaries should the investigation respect, including system or population of interest, time period, assumptions, excluded directions, available resources, privacy restrictions, desired depth, or limits on experiments and external actions?
+
+If the user does not yet have a precise research question, do not force them to formulate one alone. Help translate their interests, observations, or uncertainty into a clear and researchable objective.
+
+Do not ask the user for background information that can reasonably be discovered during research, and do not require them to propose a research method or plan.
+
+After the initial questions, synthesize the discussion into a preliminary research task containing:
+
+- research objective or central question
+- relevant context
+- supplied evidence and resources
+- desired outputs
+- practical success or stopping criteria
+- scope and constraints
+- important unknowns
+- initial research direction
+
+Clearly distinguish:
+
+- user-provided facts and observations
+- user-provided hypotheses or interpretations
+- agent assumptions and inferences
+- unresolved questions
+
+Do not manufacture competing hypotheses when the research question does not require them.
+
+Do not keep asking questions merely to eliminate uncertainty.
+
+Proceed with reasonable, reversible assumptions when possible. Ask additional questions only when an unresolved issue depends on the user's priorities, materially changes the research scope or stopping criteria, requires inaccessible information, or requires authorization for a consequential action.
+
+Once the research task is sufficiently defined, transition directly into the research agentic system setup instructions described in the **"Start a project"** section of the README.
+
