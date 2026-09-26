@@ -34,16 +34,23 @@ flowchart TD
         Analyze ==> Evidence
         Test ==> Evidence
         Verify ==> Evidence
-        Evidence ==> Update["Update State"] ==> Resolved{"Objective Resolved?"}
-        Resolved ==>|No: choose next question| Uncertainty
+        Evidence ==> Update["Update State<br/>Save records first, clear in-flight entry last"] ==> Resolved{"Objective Resolved?"}
+        Resolved ==>|No| Progress{"New evidence this cycle?"}
+        Progress ==>|Yes: choose next question| Uncertainty
+        Progress ==>|No: change method or reframe| RuledOut["Record ruled-out avenue<br/>and reset the attempt count"]
+        RuledOut ==> Uncertainty
     end
 
-    Files -.->|Start or resume: read saved context| Uncertainty
-    Map -.->|Relevant relationships, checked against records| Uncertainty
+    Files -.->|Start or resume: read saved context| Reconcile["Reconcile in-flight action, ownership,<br/>later steering and the ruled-out list"]
+    Map -.->|Relevant relationships, checked against records| Reconcile
+    Reconcile -.-> Uncertainty
     Update -.->|Save| Files
     Resolved -->|Yes| Report["Final research report"]
     Resolved -->|Blocked: missing data or experiment| Intervention["Human intervention"]
+    RuledOut -.->|Avenues exhausted: ask one specific question| Intervention
     Intervention -->|Input supplied| Files
 
     style Director stroke:#2563eb,stroke-width:3px
 ```
+
+Across runs the loop is made restartable by `STATE.md`'s continuity fields. One session owns the checkpoint at a time. Intent for an external, irreversible, or long-running action is recorded before the action, so an interrupted run leaves a detectable UNKNOWN outcome to verify rather than a silent gap. Records and artifacts are written before the state that references them, and the in-flight entry is cleared last. A cycle that produces no new evidence changes method, reframes the question, or is recorded as ruled out, so a fresh agent neither repeats a dead end nor loops on one avenue forever. See [persistent loop robustness](AGENTS.md#persistent-loop-robustness).

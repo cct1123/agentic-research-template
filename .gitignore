@@ -1,0 +1,24 @@
+# Local credentials and private inputs; review filenames before committing.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+inputs/private/
+
+# Research working data that should not be committed by default. Preserve
+# supplied originals deliberately; keep large or private source copies out of
+# version control unless intentionally retained.
+evidence/sources/private/
+analysis/scratch/
+*.tmp
+
+# Common local caches and editor/OS artifacts.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.DS_Store
+Thumbs.db
+~$*
