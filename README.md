@@ -2,6 +2,62 @@
 
 A small, tool-agnostic workspace for investigating a question, testing explanations, and producing an evidence-backed answer. Plain Markdown preserves the investigation across agents and interruptions. A capable agent with suitable research tools performs the work; this template does not itself run an agent or schedule background work.
 
+## Readme for AI Agents
+
+If a user provides this repository because they want help with a research problem, first help them formulate the research task.
+<details>
+
+<summary>Conversation style</summary>
+
+Keep the interaction **short, conversational, and progressive**.
+
+- Ask **one question per message**.
+- Ask **at most four initial questions total**.
+- Ask only the next most useful question based on what the user has already said.
+- Skip questions whose answers are already known.
+- Stop asking questions early if the research task is sufficiently clear.
+- Keep responses concise. Do not explain the entire framework, present a long checklist, or dump multiple questions at once.
+- Do not ask the user to write a research brief or research plan.
+- Do not require the user to know research terminology or methodology.
+
+The initial conversation should establish, as needed:
+
+1. **Research objective** — What does the user want to understand, explain, determine, compare, test, or resolve?
+2. **Relevant context and supplied evidence** — What observations, data, papers, prior results, hypotheses, models, or other information does the user already have?
+3. **Useful resolution** — What kind of answer, evidence, comparison, explanation, prediction, or output would be useful?
+4. **Scope and constraints** — What important boundaries should the investigation respect?
+
+Do not ask these four questions as a list. Select and ask them **one at a time**, adapting each next question to the user's previous answer.
+
+If the user does not yet have a precise research question, help refine their interests, observations, or uncertainty into a researchable objective.
+
+Do not ask the user for background information that can reasonably be discovered during the research process. Do not require them to propose methods or a research plan.
+
+</details>
+<details>
+
+<summary>When enough information is available</summary>
+
+Briefly synthesize the discussion into a preliminary research task covering:
+
+- central research question or objective
+- relevant context
+- supplied evidence and resources
+- desired output or useful resolution
+- scope and constraints
+- important unknowns
+- initial research direction
+
+Keep this synthesis concise. Clearly distinguish user-provided observations, user hypotheses, agent assumptions or inferences, and unresolved questions.
+
+Do not continue questioning merely to remove uncertainty. Proceed with reasonable, reversible assumptions when possible.
+
+Ask an additional question later only when the answer depends on the user's priorities, materially changes the research scope or stopping criteria, requires inaccessible information, or is necessary before a consequential action.
+
+Once the research task is sufficiently defined, transition directly into the research agentic system setup instructions in the **"Start a project"** section of this README.
+
+</details> 
+
 ## Start a project
 
 **Human–agent discussion → project setup → persistent research loop.**
@@ -136,53 +192,3 @@ The numbered write order is what makes an interruption detectable: it leaves unr
 The agent handles routine reversible decisions. It asks for human input when essential inaccessible information, a consequential preference, changed scope, or an action requiring authorization prevents progress. Existing authorization continues to apply, and independent useful work can continue while an answer is pending.
 
 A finished project has a synthesis in [outputs/REPORT.md](outputs/REPORT.md) and a matching state checkpoint that explains why investigation stopped. Outcomes may be an answer, a qualified answer, surviving alternatives, a negative result, or a currently unresolvable question. A reached budget can also end a run with an explicitly incomplete result. A temporary blocker is marked `blocked` and includes the exact input needed to resume. None of these statuses implies certainty.
-
-## Readme for AI Chatbots or Assistants
-
-If a user provides this repository because they want help with a research problem, first help them formulate the research task.
-
-### Conversation style
-
-Keep the interaction **short, conversational, and progressive**.
-
-- Ask **one question per message**.
-- Ask **at most four initial questions total**.
-- Ask only the next most useful question based on what the user has already said.
-- Skip questions whose answers are already known.
-- Stop asking questions early if the research task is sufficiently clear.
-- Keep responses concise. Do not explain the entire framework, present a long checklist, or dump multiple questions at once.
-- Do not ask the user to write a research brief or research plan.
-- Do not require the user to know research terminology or methodology.
-
-The initial conversation should establish, as needed:
-
-1. **Research objective** — What does the user want to understand, explain, determine, compare, test, or resolve?
-2. **Relevant context and supplied evidence** — What observations, data, papers, prior results, hypotheses, models, or other information does the user already have?
-3. **Useful resolution** — What kind of answer, evidence, comparison, explanation, prediction, or output would be useful?
-4. **Scope and constraints** — What important boundaries should the investigation respect?
-
-Do not ask these four questions as a list. Select and ask them **one at a time**, adapting each next question to the user's previous answer.
-
-If the user does not yet have a precise research question, help refine their interests, observations, or uncertainty into a researchable objective.
-
-Do not ask the user for background information that can reasonably be discovered during the research process. Do not require them to propose methods or a research plan.
-
-### When enough information is available
-
-Briefly synthesize the discussion into a preliminary research task covering:
-
-- central research question or objective
-- relevant context
-- supplied evidence and resources
-- desired output or useful resolution
-- scope and constraints
-- important unknowns
-- initial research direction
-
-Keep this synthesis concise. Clearly distinguish user-provided observations, user hypotheses, agent assumptions or inferences, and unresolved questions.
-
-Do not continue questioning merely to remove uncertainty. Proceed with reasonable, reversible assumptions when possible.
-
-Ask an additional question later only when the answer depends on the user's priorities, materially changes the research scope or stopping criteria, requires inaccessible information, or is necessary before a consequential action.
-
-Once the research task is sufficiently defined, transition directly into the research agentic system setup instructions in the **"Start a project"** section of this README.
